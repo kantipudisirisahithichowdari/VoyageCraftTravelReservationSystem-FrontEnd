@@ -1,119 +1,134 @@
-# VoyageCraft – Multi-Destination Travel Package & Reservation Platform (Frontend)
+# VoyageCraft – Travel Reservation Platform
 
-A modern, professional **React.js + Vite** frontend for the **VoyageCraft** microservices platform, featuring a rich **Navy Blue, Sky Blue, White, and Teal** travel design system and role-based portals for **Admin**, **Traveler**, and **Package Provider**.
-
----
-
-## 🎨 Design System & Color Palette
-
-* **Midnight Navy & Royal Navy (`#0f172a`, `#1e3a8a`)**: High-contrast headers, hero banners, and dark buttons.
-* **Sky Blue (`#0284c7`, `#38bdf8`)**: Primary brand actions, links, pricing highlights, and active tabs.
-* **Oceanic Teal (`#0d9488`, `#14b8a6`)**: Provider actions, destination badges, and positive metrics.
-* **White & Soft Slate (`#ffffff`, `#f8fafc`)**: Clean surfaces, modern cards with subtle shadows.
-* **Typography**: Clean, readable sans-serif (*Plus Jakarta Sans*) with responsive spacing across desktop, tablet, and mobile.
+A modern, responsive React web application for discovering, booking, and managing multi-destination travel packages. The application is completely self-contained and runs purely on the frontend with built-in data persistence in local storage, requiring no backend setup.
 
 ---
 
-## 👥 3 User Roles & Capabilities
+## Highlights
 
-### 1. 🛡️ Admin (`ADMIN`)
-* **Dashboard (`/admin/dashboard`)**: Platform overview showing Registered Users count, Total Packages, Total Bookings, and Gross Platform Revenue.
-* **Manage Users (`/admin/manage-users`)**: Comprehensive table of all registered users and assigned roles.
-* **Manage Packages (`/admin/manage-packages`)**: Moderate, inspect, and remove tour packages across all providers.
-* **Manage Bookings (`/admin/manage-bookings`)**: Audit global customer reservations and payment records.
-
-### 2. 🏨 Package Provider (`PROVIDER`)
-* **Dashboard (`/provider/dashboard`)**: KPI cards for Total Packages, Active Listings, and Open Seats with recent listings table.
-* **My Packages (`/provider/my-packages`)**: Manage, view, edit, or delete provider-owned packages.
-* **Add Package (`/provider/add-package`)**: Create new packages with **dynamic multi-destination itinerary builders** (City & Country rows), departure seats, duration, cover image, and pricing.
-* **Edit Package (`/provider/edit-package/:id`)**: Update itinerary, pricing, and seat allocation.
-
-### 3. ✈️ Traveler (`TRAVELER`)
-* **Dashboard (`/traveler/dashboard`)**: Welcome hero, booking statistics (Confirmed vs Pending), recent bookings summary, and curated packages.
-* **Explore Packages (`/packages`)**: Live search bar filtering by destination or tour name.
-* **Package Details (`/packages/:id`)**: Multi-destination route breakdown, itinerary inclusions, and availability.
-* **Booking & Automatic Price (`/booking/:id`)**: Live traveler count counter with automatic price recalculation (`Travelers × Price`).
-* **Demo Payment (`/payment/:bookingId`)**: Connects to Spring Boot Payment Service with status feedback.
-* **Booking Confirmation (`/booking-confirmation/:bookingId`)**: Ticket receipt summary.
-* **My Bookings (`/my-bookings`)**: Track personal reservations with status badges (`Confirmed`, `Pending Payment`).
+* **Standalone & Ready to Run**: Works out of the box with zero external backend dependencies. All data (users, tour packages, bookings, payments) is managed and persisted directly in your browser.
+* **Role-Based Portals**: Tailored interfaces and navigation for Travelers, Tour Providers, and Administrators.
+* **Multi-Destination Itineraries**: Tour packages featuring detailed routes across multiple cities and countries with included amenities and highlights.
+* **Interactive Booking & Checkout**: Real-time traveler count updates, automatic price recalculation, and simulated payment confirmation.
+* **Modern Navy & Teal Travel Theme**: Clean, responsive design optimized for desktops, tablets, and mobile screens.
 
 ---
 
-## 📁 Project Structure
+## User Roles & Capabilities
+
+### 1. Traveler
+* Browse curated vacation packages with live search by title or destination.
+* Inspect multi-city itineraries, duration, included perks, and available seats.
+* Reserve packages with dynamic price calculation based on number of travelers.
+* Complete simulated checkout with instant transaction receipts.
+* View and track personal reservations in the Traveler Dashboard.
+
+### 2. Package Provider
+* Access the dedicated Provider Dashboard with listing metrics.
+* Publish new travel packages with multi-destination builders (city & country rows).
+* Edit existing package itineraries, pricing, and seat availability.
+* Delete or retire packages from the provider inventory.
+
+### 3. Administrator
+* Access the Admin Command Center displaying total users, packages, bookings, and revenue.
+* View the directory of all registered accounts and role assignments.
+* Moderate and manage all packages published across providers.
+* Audit the platform-wide customer reservations ledger.
+
+---
+
+## Demo Accounts
+
+You can sign in instantly using any of the pre-configured accounts below, or create a brand new account using the registration page:
+
+| Role | Email | Password | Target Portal |
+| :--- | :--- | :--- | :--- |
+| **Administrator** | `admin@voyagecraft.com` | `admin123` | Admin Dashboard |
+| **Package Provider** | `provider@voyagecraft.com` | `provider123` | Provider Dashboard |
+| **Traveler** | `traveler@voyagecraft.com` | `traveler123` | Traveler Dashboard |
+
+*(Tip: On the login page, you can also click the quick demo buttons to auto-fill these credentials).*
+
+---
+
+## Getting Started
+
+### Prerequisites
+Make sure you have Node.js (version 16 or newer) installed on your system.
+
+### Step 1: Install Dependencies
+```bash
+npm install
+```
+
+### Step 2: Start Development Server
+```bash
+npm run dev
+```
+
+### Step 3: Open in Browser
+Visit the local server address shown in your terminal (typically `localhost:5173`).
+
+### Production Build
+To create an optimized production build:
+```bash
+npm run build
+```
+The output files will be generated in the `dist` folder, ready for deployment on static hosting platforms like Vercel, Netlify, or GitHub Pages.
+
+---
+
+## Project Structure
 
 ```
 PROJECT-frontend/
-├── index.html
-├── package.json
-├── vite.config.js
-├── .env                              # Base URL: http://localhost:8080
+├── index.html                  # HTML entry point
+├── package.json                # Project dependencies and npm scripts
+├── vite.config.js              # Vite configuration
 └── src/
-    ├── main.jsx                      # App root with BrowserRouter & AuthProvider
-    ├── App.jsx                       # Route table with ProtectedRoute authorization
+    ├── main.jsx                # Application root with router and auth provider
+    ├── App.jsx                 # Route table and navigation layout
     ├── components/
-    │   ├── Navbar.jsx                # Dynamic navigation tailored to current role
-    │   ├── ProtectedRoute.jsx        # Role-based route guard
-    │   └── PackageCard.jsx           # Multi-destination tour card
+    │   ├── Navbar.jsx          # Dynamic navigation bar tailored to current role
+    │   ├── PackageCard.jsx     # Travel package display card
+    │   └── ProtectedRoute.jsx  # Role-based route guard
     ├── pages/
-    │   ├── Home.jsx                  # Hero banner & featured tours
-    │   ├── Login.jsx                 # Single login for all roles + automatic role redirect
-    │   ├── Register.jsx              # Sign-up with role selection dropdown
-    │   ├── Profile.jsx               # User profile & role permissions breakdown
-    │   ├── AccessDenied.jsx          # Unauthorized access notification
-    │   ├── Packages.jsx              # Tour catalog with search
-    │   ├── PackageDetails.jsx        # Multi-destination itinerary view
-    │   ├── Booking.jsx               # Traveler reservation form
-    │   ├── Payment.jsx               # Payment Service integration
-    │   ├── BookingConfirmation.jsx   # Ticket summary receipt
-    │   ├── MyBookings.jsx            # Traveler reservations list
-    │   ├── TravelerDashboard.jsx     # Traveler portal
-    │   ├── ProviderDashboard.jsx     # Provider portal
-    │   ├── MyPackages.jsx            # Provider package management
-    │   ├── AddPackage.jsx            # Multi-destination package creation form
-    │   ├── EditPackage.jsx           # Package editing form
-    │   ├── AdminDashboard.jsx        # Admin command center
-    │   ├── ManageUsers.jsx           # Admin user management
-    │   ├── ManagePackages.jsx        # Admin package moderation
-    │   └── ManageBookings.jsx        # Admin platform bookings ledger
+    │   ├── Home.jsx            # Landing page with hero banner and featured tours
+    │   ├── Login.jsx           # Sign-in page with quick demo account buttons
+    │   ├── Register.jsx        # Account registration with role selection
+    │   ├── Profile.jsx         # User profile and account preferences
+    │   ├── Packages.jsx        # Full catalog with search filtering
+    │   ├── PackageDetails.jsx  # Multi-city itinerary view
+    │   ├── Booking.jsx         # Reservation form with live price calculation
+    │   ├── Payment.jsx         # Simulated checkout and receipt generation
+    │   ├── MyBookings.jsx      # Traveler booking list
+    │   ├── TravelerDashboard.jsx # Traveler welcome portal
+    │   ├── ProviderDashboard.jsx # Provider management portal
+    │   ├── MyPackages.jsx      # Provider package inventory
+    │   ├── AddPackage.jsx      # Multi-city package creation form
+    │   ├── EditPackage.jsx     # Package modification form
+    │   ├── AdminDashboard.jsx  # Platform overview and metrics
+    │   ├── ManageUsers.jsx     # Admin user management
+    │   ├── ManagePackages.jsx  # Admin package moderation
+    │   └── ManageBookings.jsx  # Admin reservation audit log
     ├── services/
-    │   ├── api.js                    # Axios instance with JWT Authorization Bearer interceptor
-    │   ├── authService.js            # Auth API, JWT decoder, role normalizer
-    │   ├── packageService.js         # Package CRUD with offline sample fallback
-    │   ├── bookingService.js         # Booking microservice calls
-    │   └── paymentService.js         # Payment microservice calls
+    │   ├── mockData.js         # Initial dataset and localStorage data store
+    │   ├── authService.js      # Authentication, user sessions, role normalization
+    │   ├── packageService.js   # Package operations and inventory management
+    │   ├── bookingService.js   # Reservation handling and seat allocation
+    │   └── paymentService.js   # Payment simulation and receipt processing
     ├── context/
-    │   └── AuthContext.jsx           # Global user, JWT token, and role state
+    │   └── AuthContext.jsx     # Global authentication and user state
     └── styles/
-        └── main.css                  # Unified design system & responsive styling
+        └── main.css            # Complete design system and responsive styles
 ```
 
 ---
 
-## 🚀 How to Run the Frontend
+## Technologies Used
 
-1. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
-
-2. **Start Development Server**:
-   ```bash
-   npm run dev
-   ```
-
-3. Open your browser:
-   👉 **`http://localhost:5173`**
-
----
-
-## 🔑 Demo Role Logins (For Testing / Presentations)
-
-You can log in or register with any of the following demo roles:
-
-| Role | Demo Email | Target Dashboard |
-| :--- | :--- | :--- |
-| **Admin** | `admin@voyagecraft.com` | `/admin/dashboard` |
-| **Package Provider** | `provider@voyagecraft.com` | `/provider/dashboard` |
-| **Traveler** | `traveler@voyagecraft.com` | `/traveler/dashboard` |
-
-*(Note: Password can be any text with at least 4 characters for testing)*
+* **React 18**: UI component library
+* **Vite**: Ultra-fast build tool and development server
+* **React Router 6**: Client-side routing and protected routes
+* **LocalStorage API**: In-browser persistent storage for data across sessions
+* **Vanilla CSS**: Custom travel design system with responsive layouts
