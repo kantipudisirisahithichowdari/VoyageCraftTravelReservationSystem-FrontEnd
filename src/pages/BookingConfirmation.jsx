@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, Link, useParams } from 'react-router-dom';
+import formatINR from '../services/currency';
 
 const BookingConfirmation = () => {
   const { bookingId } = useParams();
@@ -76,7 +77,7 @@ const BookingConfirmation = () => {
             </div>
             <div>
               <div style={{ fontSize: '0.8rem', color: '#64748b' }}>Total Paid:</div>
-              <div style={{ fontWeight: 800, color: '#0284c7', fontSize: '1.15rem' }}>${details.totalPrice}</div>
+              <div style={{ fontWeight: 800, color: '#0284c7', fontSize: '1.15rem' }}>{formatINR(details.totalPrice)}</div>
             </div>
           </div>
 

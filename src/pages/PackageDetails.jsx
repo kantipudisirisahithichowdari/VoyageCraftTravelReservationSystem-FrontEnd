@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import packageService from '../services/packageService';
+import formatINR from '../services/currency';
 import { useAuth } from '../context/AuthContext';
 
 const defaultImage = 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80';
@@ -138,7 +139,7 @@ const PackageDetails = () => {
             <div style={{ color: '#64748b', fontSize: '0.85rem', textTransform: 'uppercase', fontWeight: 600 }}>
               Price per traveler
             </div>
-            <div style={{ fontSize: '2.4rem', fontWeight: 800, color: '#0284c7' }}>${price}</div>
+            <div style={{ fontSize: '2.4rem', fontWeight: 800, color: '#0284c7' }}>{formatINR(price)}</div>
           </div>
 
           <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '16px', marginBottom: '20px' }}>

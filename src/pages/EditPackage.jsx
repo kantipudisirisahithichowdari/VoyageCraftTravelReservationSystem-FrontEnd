@@ -139,7 +139,7 @@ const EditPackage = () => {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
             <div className="form-group">
               <label className="form-label" htmlFor="price">
-                Price ($ USD)
+                Price (INR)
               </label>
               <input
                 type="number"

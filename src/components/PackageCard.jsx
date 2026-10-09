@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import formatINR from '../services/currency';
+import { useWishlist } from '../context/WishlistContext';
 
 const defaultImage =
   'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80';
@@ -21,15 +23,17 @@ const getSeatBadgeStyle = (seats) => {
 
 const PackageCard = ({ pkg, showActions = true }) => {
   const navigate = useNavigate();
+  const { isWishlisted, toggleWishlist } = useWishlist();
 
   const id = pkg.id || pkg.packageId;
   const name = pkg.name || pkg.title || pkg.packageName || 'Scenic Getaway';
+  const category = pkg.category || null;
   const destination = pkg.destination || pkg.location || 'Exotic Destination';
   const destinations = pkg.destinations || [];
   const description =
     pkg.description || 'Explore scenic views, landmarks, and rich cultures.';
   const price = pkg.price || pkg.cost || 499;
-  const originalPrice = pkg.originalPrice || null; // for strikethrough
+  const originalPrice = pkg.originalPrice || (pkg.price ? Math.round(pkg.price * 1.25) : null);
   const seats =
     pkg.availableSeats !== undefined
       ? pkg.availableSeats
@@ -37,6 +41,7 @@ const PackageCard = ({ pkg, showActions = true }) => {
   const imageUrl = pkg.imageUrl || pkg.image || defaultImage;
   const duration = pkg.duration || '5 Days / 4 Nights';
   const { rating, reviews } = mockRating(id);
+  const wishlisted = isWishlisted(id);
 
   const badgeStyle = getSeatBadgeStyle(seats);
 
@@ -60,6 +65,25 @@ const PackageCard = ({ pkg, showActions = true }) => {
             e.target.src = defaultImage;
           }}
         />
+
+        {/* Wishlist toggle button */}
+        <button
+          type="button"
+          className={`card-wishlist-btn ${wishlisted ? 'active' : ''}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleWishlist(id);
+          }}
+          title={wishlisted ? 'Remove from saved' : 'Save to favorites'}
+          aria-label="Save package"
+        >
+          {wishlisted ? '❤️' : '🤍'}
+        </button>
+
+        {/* Category tag pill */}
+        {category && (
+          <span className="package-card-cat-pill">{category}</span>
+        )}
 
         {/* Seat availability badge */}
         <span
@@ -119,9 +143,9 @@ const PackageCard = ({ pkg, showActions = true }) => {
             <span className="package-price-label">From / person</span>
             <div className="package-price-row">
               {originalPrice && (
-                <span className="package-price-original">${originalPrice}</span>
+                <span className="package-price-original">{formatINR(originalPrice)}</span>
               )}
-              <span className="package-price-val">${price}</span>
+              <span className="package-price-val">{formatINR(price)}</span>
             </div>
           </div>
 

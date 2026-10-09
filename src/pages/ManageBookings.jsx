@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import bookingService from '../services/bookingService';
+import formatINR from '../services/currency';
 
 const ManageBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -93,7 +94,7 @@ const ManageBookings = () => {
                     <td>{pkgName}</td>
                     <td>📍 {dest}</td>
                     <td>{count} traveler(s)</td>
-                    <td><strong style={{ color: '#0284c7' }}>${total}</strong></td>
+                    <td><strong style={{ color: '#0284c7' }}>{formatINR(total)}</strong></td>
                     <td>{getStatusBadge(b.status)}</td>
                   </tr>
                 );

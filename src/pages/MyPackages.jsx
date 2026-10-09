@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import packageService from '../services/packageService';
+import formatINR from '../services/currency';
 
 const MyPackages = () => {
   const { user } = useAuth();
@@ -95,7 +96,7 @@ const MyPackages = () => {
                   <tr key={id}>
                     <td><strong>{name}</strong></td>
                     <td>📍 {destination}</td>
-                    <td><strong style={{ color: '#0284c7' }}>${pkg.price || pkg.cost}</strong></td>
+                    <td><strong style={{ color: '#0284c7' }}>{formatINR(pkg.price || pkg.cost)}</strong></td>
                     <td>{seats} seats</td>
                     <td>{pkg.duration || '5 Days'}</td>
                     <td>

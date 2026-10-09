@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useLocation, useNavigate, Link } from 'react-router-dom';
 import paymentService from '../services/paymentService';
+import formatINR from '../services/currency';
 
 const Payment = () => {
   const { bookingId } = useParams();
@@ -110,7 +111,7 @@ const Payment = () => {
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
                 <span style={{ color: '#64748b' }}>Amount Paid:</span>
-                <strong style={{ color: '#0284c7' }}>${bookingData.totalPrice}</strong>
+                <strong style={{ color: '#0284c7' }}>{formatINR(bookingData.totalPrice)}</strong>
               </div>
             </div>
 
@@ -154,7 +155,7 @@ const Payment = () => {
               <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '10px', marginTop: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontSize: '1.05rem', fontWeight: 600 }}>Total Amount:</span>
                 <span style={{ fontSize: '1.6rem', fontWeight: 800, color: '#0284c7' }}>
-                  ${bookingData.totalPrice}
+                  {formatINR(bookingData.totalPrice)}
                 </span>
               </div>
             </div>
@@ -168,7 +169,7 @@ const Payment = () => {
               className="btn btn-teal btn-lg btn-block"
               disabled={loading}
             >
-              {loading ? 'Processing Payment...' : `Pay Now ($${bookingData.totalPrice})`}
+              {loading ? 'Processing Payment...' : `Pay Now (${formatINR(bookingData.totalPrice)})`}
             </button>
 
             <div style={{ textAlign: 'center', marginTop: '16px' }}>

@@ -174,7 +174,7 @@ const AddPackage = () => {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
             <div className="form-group">
               <label className="form-label" htmlFor="price">
-                Price per Traveler ($ USD) *
+                Price per Traveler (INR) *
               </label>
               <input
                 type="number"

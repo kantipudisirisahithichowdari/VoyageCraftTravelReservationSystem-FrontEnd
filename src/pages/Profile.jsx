@@ -27,7 +27,7 @@ const Profile = () => {
     name:     user?.name  || '',
     email:    user?.email || '',
     phone:    user?.phone || '+1-555-0300',
-    currency: 'USD',
+    currency: 'INR',
     language: 'English',
   });
   const [saved, setSaved] = useState(false);
@@ -58,12 +58,12 @@ const Profile = () => {
           { label: 'Packages Listed', value: '6',    icon: '🗺️' },
           { label: 'Total Bookings',  value: '18',   icon: '🎫' },
           { label: 'Avg Rating',      value: '4.8★', icon: '⭐' },
-          { label: 'Revenue',         value: '$12K', icon: '💳' },
+          { label: 'Revenue',         value: '₹12K', icon: '💳' },
         ]
       : [
           { label: 'Trips Completed',   value: '2',   icon: '✈️' },
           { label: 'Countries Visited', value: '4',   icon: '🌍' },
-          { label: 'Total Spent',       value: '$2.6K', icon: '💳' },
+          { label: 'Total Spent',       value: '₹2.6K', icon: '💳' },
           { label: 'Loyalty Points',    value: '1,840', icon: '🔖' },
         ];
 

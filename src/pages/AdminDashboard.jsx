@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import packageService from '../services/packageService';
 import bookingService from '../services/bookingService';
 import authService from '../services/authService';
+import formatINR from '../services/currency';
 
 const AdminDashboard = () => {
   const { user } = useAuth();
@@ -108,7 +109,7 @@ const AdminDashboard = () => {
           <div className="stat-icon stat-icon-amber">💰</div>
           <div className="stat-info">
             <span className="stat-label">Platform Volume</span>
-            <span className="stat-value">${stats.totalRevenue.toLocaleString()}</span>
+            <span className="stat-value">{formatINR(stats.totalRevenue)}</span>
           </div>
         </div>
       </div>
@@ -149,7 +150,7 @@ const AdminDashboard = () => {
                     <td>{b.travelerName || b.userEmail || 'Customer'}</td>
                     <td>{b.packageName || b.package?.name}</td>
                     <td>{b.numTravelers || 1} passenger(s)</td>
-                    <td><strong style={{ color: '#0284c7' }}>${b.totalPrice || b.amount}</strong></td>
+                    <td><strong style={{ color: '#0284c7' }}>{formatINR(b.totalPrice || b.amount)}</strong></td>
                     <td>
                       <span className={`status-badge ${(b.status || '').toLowerCase() === 'confirmed' || (b.status || '').toLowerCase() === 'paid' ? 'status-confirmed' : 'status-pending'}`}>
                         {b.status || 'CONFIRMED'}

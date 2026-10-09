@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import packageService from '../services/packageService';
 import bookingService from '../services/bookingService';
+import formatINR from '../services/currency';
 
 const Booking = () => {
   const { id } = useParams();
@@ -279,7 +280,7 @@ const Booking = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '20px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.95rem' }}>
               <span style={{ color: '#64748b' }}>Rate per traveler:</span>
-              <strong>${packagePrice}</strong>
+              <strong>{formatINR(packagePrice)}</strong>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.95rem' }}>
               <span style={{ color: '#64748b' }}>Travelers:</span>
@@ -290,7 +291,7 @@ const Booking = () => {
           <div style={{ borderTop: '2px solid #e2e8f0', paddingTop: '16px', marginTop: '16px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ fontSize: '1.1rem', fontWeight: 600 }}>Total Price:</span>
-              <span style={{ fontSize: '1.8rem', fontWeight: 800, color: '#0284c7' }}>${totalPrice}</span>
+              <span style={{ fontSize: '1.8rem', fontWeight: 800, color: '#0284c7' }}>{formatINR(totalPrice)}</span>
             </div>
           </div>
         </div>

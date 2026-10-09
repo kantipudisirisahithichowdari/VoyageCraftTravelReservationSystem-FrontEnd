@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import packageService from '../services/packageService';
+import formatINR from '../services/currency';
 
 const ProviderDashboard = () => {
   const { user } = useAuth();
@@ -126,7 +127,7 @@ const ProviderDashboard = () => {
                         📍 {pkg.destination || (pkg.destinations && pkg.destinations.map(d => typeof d === 'string' ? d : d.city).join(', ')) || 'Multiple Cities'}
                       </td>
                       <td>
-                        <strong style={{ color: '#0284c7' }}>${pkg.price || pkg.cost}</strong>
+                        <strong style={{ color: '#0284c7' }}>{formatINR(pkg.price || pkg.cost)}</strong>
                       </td>
                       <td>{seats} seats</td>
                       <td>

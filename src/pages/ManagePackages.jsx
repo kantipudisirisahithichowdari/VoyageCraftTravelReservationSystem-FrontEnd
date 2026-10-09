@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import packageService from '../services/packageService';
+import formatINR from '../services/currency';
 
 const ManagePackages = () => {
   const [packages, setPackages] = useState([]);
@@ -87,7 +88,7 @@ const ManagePackages = () => {
                     <td><strong>#{id}</strong></td>
                     <td><strong>{name}</strong></td>
                     <td>📍 {destination}</td>
-                    <td><strong style={{ color: '#0284c7' }}>${pkg.price || pkg.cost}</strong></td>
+                    <td><strong style={{ color: '#0284c7' }}>{formatINR(pkg.price || pkg.cost)}</strong></td>
                     <td>{seats} seats</td>
                     <td>
                       <span className={`status-badge ${seats > 0 ? 'status-active' : 'status-inactive'}`}>

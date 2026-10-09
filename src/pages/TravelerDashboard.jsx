@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import packageService from '../services/packageService';
 import bookingService from '../services/bookingService';
+import formatINR from '../services/currency';
 import PackageCard from '../components/PackageCard';
 
 // ── Skeleton card for loading state ────────────────────────────
@@ -164,10 +165,10 @@ const TravelerDashboard = () => {
             },
             {
               icon: '💳', label: 'Total Spent',
-              value: `$${totalSpent.toLocaleString()}`,
+              value: formatINR(totalSpent),
               sub: 'Across all bookings',
               color: '#8b5cf6', bg: '#f5f3ff',
-              trend: 'Avg $' + Math.round(totalSpent / Math.max(bookings.length, 1)), up: false,
+              trend: `Avg ${formatINR(Math.round(totalSpent / Math.max(bookings.length, 1)))}`, up: false,
             },
             {
               icon: '🔖', label: 'Loyalty Points',
@@ -225,7 +226,7 @@ const TravelerDashboard = () => {
                       <div className="booking-summary-meta">
                         <span>👤 {b.numTravelers} traveler(s)</span>
                         <span style={{ color: 'var(--sky-blue)', fontWeight: 700 }}>
-                          ${b.totalPrice}
+                          {formatINR(b.totalPrice)}
                         </span>
                       </div>
                       <div className="booking-summary-actions">

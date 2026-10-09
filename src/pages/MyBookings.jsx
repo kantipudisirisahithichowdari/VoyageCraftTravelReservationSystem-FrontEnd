@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import bookingService from '../services/bookingService';
+import formatINR from '../services/currency';
 
 const MyBookings = () => {
   const { user, isAuthenticated } = useAuth();
@@ -110,7 +111,7 @@ const MyBookings = () => {
                   <div style={{ textAlign: 'right' }}>
                     <div style={{ fontSize: '0.75rem', color: '#64748b', textTransform: 'uppercase' }}>Total Amount</div>
                     <div style={{ fontSize: '1.3rem', fontWeight: 800, color: '#0284c7' }}>
-                      ${totalAmount}
+                      {formatINR(totalAmount)}
                     </div>
                   </div>
 
