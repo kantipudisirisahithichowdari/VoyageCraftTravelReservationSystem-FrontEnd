@@ -20,7 +20,6 @@ VoyageCraft is a modern, responsive React web application designed to simplify t
 * React Router 6
 * HTML5
 * CSS3
-* Browser LocalStorage
 
 ## Project Structure
 
